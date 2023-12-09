@@ -1,6 +1,6 @@
 import customtkinter
-import utils
-
+import server
+import client
 
 class TextboxFrame(customtkinter.CTkScrollableFrame):
     def __init__(self, master):
@@ -45,7 +45,7 @@ class Sidebar(customtkinter.CTkFrame):
         super().__init__(master, **kwargs)
 
         self.logo_label = customtkinter.CTkLabel(
-            self, text="Packets", font=customtkinter.CTkFont(size=20, weight="bold")
+            self, text="Connected", font=customtkinter.CTkFont(size=20, weight="bold")
         )
         self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
 
