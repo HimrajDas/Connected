@@ -32,7 +32,8 @@ class Server:
     def handle_client(self, client):
         while True:
             try:
-                msg = client.recv(1024)
+                # To Do: Need to make buffer size adaptive. 
+                msg = client.recv(1024)  # work on this stupid.
                 if not msg:
                     break
                 self.broadcast_msg(msg)
@@ -56,8 +57,8 @@ class Server:
 
 
 if __name__ == "__main__":
-    server = Server("127.0.0.1", 12000)
     try:
+        server = Server("127.0.0.1", 12000)
         server.run_server()
     except KeyboardInterrupt:
         print("Keyboard interupted!!!")
