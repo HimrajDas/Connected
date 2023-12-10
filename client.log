@@ -1,0 +1,17 @@
+[2023-12-10 12:46:36,341] INFO: Connected to server.
+[2023-12-10 12:47:08,599] INFO: Connected to server.
+[2023-12-10 12:47:46,648] INFO: Received message: himraj: how are you? joined!
+[2023-12-10 12:47:46,650] INFO: Received message: Connected to server!
+[2023-12-10 12:47:46,651] INFO: Received message: ani: hiiani: hey joined!
+[2023-12-10 12:47:46,651] INFO: Received message: ani: hiiani: hey joined!
+[2023-12-10 12:47:46,651] INFO: Received message: Connected to server!
+[2023-12-10 12:48:00,396] INFO: Received message: himraj: how are you?
+[2023-12-10 12:48:07,748] INFO: Received message: ani: fine
+[2023-12-10 12:48:20,337] INFO: Received message: ani: where r u?
+[2023-12-10 12:48:26,571] INFO: Received message: himraj: hometown
+[2023-12-10 12:48:31,711] INFO: Received message: ani: ohhh!
+[2023-12-10 12:48:31,711] INFO: Received message: ani: ohhh!
+[2023-12-10 12:48:37,325] INFO: Received message: himraj: ye!!
+[2023-12-10 12:48:37,325] INFO: Received message: himraj: ye!!
+[2023-12-10 12:48:50,247] ERROR: An error occurred while writing: 
+[2023-12-10 12:48:58,296] ERROR: An error occurred while writing: 

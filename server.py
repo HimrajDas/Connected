@@ -1,62 +1,69 @@
 import socket
 import threading
 import sys
+import logging
 
+logging.basicConfig(filename="server.log", level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
 
-# TO DO: Add logging.
 
 class Server:
     def __init__(self, ip: str, port: int):
         self.ip = ip
         self.port = port
-        self.serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.serverSocket.bind((self.ip, self.port))
-        self.serverSocket.listen()
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.bind((self.ip, self.port))
+        self.server_socket.listen()
         self.clients = []
         self.names = []
 
     def run_server(self):
         while True:
-            print("Listening bro....")
-            client, address = self.serverSocket.accept()
-            print(f"Connected with : {str(address)}")
+            logger.info("Listening for connections...")
+            client, address = self.server_socket.accept()
+            logger.info(f"Client connected from {address}")
 
-            name = client.recv(1024).decode(('utf-8'))
-            self.names.append(name)
-            self.clients.append(client)
+            try:
+                name = client.recv(1024).decode("utf-8")
+                logger.info(f"Client name: {name}")
 
-            print(f"Name is {name}")
-            self.broadcast_msg(f"{name} joined!".encode('utf-8'))
-            client.send("Connected to server!".encode('utf-8'))
+                self.names.append(name)
+                self.clients.append(client)
 
-            thread = threading.Thread(target=self.handle_client, args=(client,))
-            thread.start()
+                self.broadcast_message(f"{name} joined!".encode("utf-8"))
+                client.send("Connected to server!".encode("utf-8"))
+
+                threading.Thread(target=self.handle_client, args=(client,)).start()
+            except Exception as e:
+                logger.error(f"Error accepting connection: {e}")
+                client.close()
 
     def handle_client(self, client):
         while True:
             try:
-                # To Do: Need to make buffer size adaptive. 
-                msg = client.recv(1024)  # work on this stupid.
-                if not msg:
+                message = client.recv(1024)
+
+                if not message:
                     break
-                self.broadcast_msg(msg)
-            
-            except (ConnectionError, KeyboardInterrupt) as e:
-                print(f"Error handling client: {e}")
+
+                self.broadcast_message(message)
+            except ConnectionError:
+                logger.error(f"Connection error with client: {sys.exc_info()}")
                 client.close()
-                if isinstance(e, KeyboardInterrupt):
-                    print("Keyboard Interupted!!")
-                    self.cleanup()
-                    sys.exit()
+                break
 
-    
-    def broadcast_msg(self, msg):
+    def broadcast_message(self, message):
         for client in self.clients:
-            client.send(msg)
-
+            try:
+                client.send(message)
+            except Exception as e:
+                logger.error(f"Error sending message to client: {e}")
 
     def cleanup(self):
-        self.serverSocket.close()
+        logger.info("Closing connections...")
+        self.server_socket.close()
+        # for client in self.clients:
+        #     client.close()
 
 
 if __name__ == "__main__":
@@ -64,6 +71,6 @@ if __name__ == "__main__":
         server = Server("127.0.0.1", 12000)
         server.run_server()
     except KeyboardInterrupt:
-        print("Keyboard interupted!!!")
+        logger.info("Server stopped.")
         server.cleanup()
         sys.exit()

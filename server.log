@@ -1,0 +1,9 @@
+2023-12-10 12:46:05,743 - __main__ - INFO - Listening for connections...
+2023-12-10 12:46:36,343 - __main__ - INFO - Client connected from ('127.0.0.1', 33752)
+2023-12-10 12:47:46,648 - __main__ - INFO - Client name: himraj: how are you?
+2023-12-10 12:47:46,650 - __main__ - INFO - Listening for connections...
+2023-12-10 12:47:46,650 - __main__ - INFO - Client connected from ('127.0.0.1', 33754)
+2023-12-10 12:47:46,650 - __main__ - INFO - Client name: ani: hiiani: hey
+2023-12-10 12:47:46,651 - __main__ - INFO - Listening for connections...
+2023-12-10 12:48:51,756 - __main__ - ERROR - Connection error with client: (<class 'ConnectionResetError'>, ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None), <traceback object at 0x000001803116FC40>)
+2023-12-10 12:49:03,371 - __main__ - ERROR - Connection error with client: (<class 'ConnectionResetError'>, ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None), <traceback object at 0x0000018030BFA8C0>)
