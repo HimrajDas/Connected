@@ -2,6 +2,9 @@ import socket
 import threading
 import sys
 
+
+# TO DO: Add logging.
+
 class Server:
     def __init__(self, ip: str, port: int):
         self.ip = ip
